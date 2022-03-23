@@ -8,8 +8,7 @@ const TaskSchema = new mongoose.Schema({
     image: {
         type: String,
         required: false,
-        trim: true,
-        unique: true
+        unique:false
     },
     whattoexpect: {
         type: String,
@@ -28,7 +27,7 @@ const TaskSchema = new mongoose.Schema({
     taskers: {
         type: mongoose.Types.ObjectId,
         ref: 'tasker',
-        required: [true, 'Tasker is required']
+        required: [false, 'Tasker is required']
     }
 })
 const Task = mongoose.model('task', TaskSchema);

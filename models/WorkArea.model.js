@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const workareaSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        lowercase:true
     },
     city: {
         type: [String],

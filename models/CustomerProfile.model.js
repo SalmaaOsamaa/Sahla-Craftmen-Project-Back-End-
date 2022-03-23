@@ -17,10 +17,7 @@ const customerProfileSchema = new mongoose.Schema({
         ref: 'user',
         unique: true
     },
-    tasks: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'taskrequest' }],
-
-    }
+   
 
 
 });

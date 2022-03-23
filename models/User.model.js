@@ -1,5 +1,6 @@
 const { hash, genSalt } = require('bcryptjs');
 const mongoose = require('mongoose');
+const {Schema} = require('mongoose')
 const Address = require('./Address.model');
 
 var validateEmail = function (email) {
@@ -12,8 +13,6 @@ const UserSchema = new mongoose.Schema({
         required: [true, 'Name Field is required'],
         unique: true
     },
-    // image:
-    //     { type: String, required: true },
     email: {
         type: String,
         trim: true,
@@ -31,8 +30,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
 
     },
-
-
     role: {
         type: String,
         enum: ['admin', 'customer', 'tasker'],
@@ -53,7 +50,14 @@ const UserSchema = new mongoose.Schema({
         default: true,
         type: Boolean
     },
-
+    image:{
+        type:String,
+        default:"https://picsum.photos/400"
+    },
+    tasks: {
+        type: [{ type: Schema.Types.ObjectId, ref: 'taskrequest' }],
+        required:false
+    }
 },
     { timestamps: true });
 
