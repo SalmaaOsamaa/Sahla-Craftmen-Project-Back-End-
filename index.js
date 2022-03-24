@@ -56,7 +56,7 @@ app.post("/login", (req, res, next) => {
     })(req, res, next);
 });
 app.post("/register", (req, res) => {
-    User.findOne({ username: req.body.username }, async (err, doc) => {
+    User.findOne({ email: req.body.email }, async (err, doc) => {
         if (err) throw err;
         if (doc) res.send("User Already Exists");
         if (!doc) {
@@ -67,7 +67,7 @@ app.post("/register", (req, res) => {
                 password: hashedPassword,
                 role: 'customer',
                 name: req.body.name,
-                address: req.body.addressId
+                address: req.body.address 
 
             });
             await newUser.save();
@@ -78,6 +78,7 @@ app.post("/register", (req, res) => {
 app.get("/user", (req, res) => {
     res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
 });
+
 app.post('/createTask', (req, res) => {
     var task = new Task(req.body)
     task.save()
