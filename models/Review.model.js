@@ -12,10 +12,7 @@ const reviewSchema = new mongoose.Schema({
     reviewer: {
         type: mongoose.Types.ObjectId,
         ref: 'user',
-        required: true
-    },
-
-
+    }
 })
 const Review = mongoose.model('review', reviewSchema);
 module.exports = Review;
