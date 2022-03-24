@@ -13,6 +13,7 @@ const expressSession = require('express-session');
 const session = require("express-session");
 const User = require("./models/User.model");
 const Address = require("./models/Address.model");
+const Review = require("./models/Review.model");
 const app = express();
 
 
@@ -68,7 +69,6 @@ app.post("/register", (req, res) => {
                 role: 'customer',
                 name: req.body.name,
                 address: req.body.addressId
-
             });
             await newUser.save();
             res.send("User Created");
@@ -86,7 +86,6 @@ app.post('/createTask', (req, res) => {
 app.get('/tasks', async (req, res) => {
     let tasks = await Task.find()
     res.json(tasks)
-
 })
 app.get('/addresses', async (req, res) => {
     let addresses = await Address.find()
@@ -95,14 +94,17 @@ app.get('/addresses', async (req, res) => {
 })
 app.get('/taskers', async (req, res) => {
     let taskers = await Tasker.find()
-    res.json(taskers)
+    res.json({data : taskers})
 
 })
 
 app.get('/workAreas', async (req, res) => {
     let workAreas = await WorkArea.find()
     res.json(workAreas)
-
+})
+app.get('/reviews', async (req, res) => {
+    let review = await Review.find()
+    res.json({data : review})
 })
 app.get('/workAreas/:name', async (req, res) => {
     let name = req.params.name.toLowerCase()
@@ -119,5 +121,26 @@ app.get('/workAreas/search/:city', async (req, res) => {
 app.listen(4000, () => {
     console.log("server started at port 4000");
 })
+app.post('/taskers', async (req, res) => {
+    const tasker = new Tasker(req.body)
+    await tasker.save()
+    console.log(data);
+    res.send(data)
+})
 
-
+app.post('/reviews', async (req, res) => {
+    const review = new Review(req.body)
+    await review.save()
+    console.log(data);
+    res.send(data)
+})
+app.patch('/taskers/:id', async (req, res) => {
+    try {
+        const tasker = await Tasker.findById(req.params.id)
+        Object.assign(tasker , req.body)
+        tasker.save()
+        res.send({data : tasker})
+    } catch {
+        res.status(404).send({error : "tasker not found"})
+    }
+})

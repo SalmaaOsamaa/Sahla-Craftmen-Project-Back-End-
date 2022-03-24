@@ -28,20 +28,14 @@ const TaskerSchema = new mongoose.Schema({
     }],
     reviews:
         [{ type: mongoose.Types.ObjectId, ref: 'review' }],
-
-
     numberOfReviews: {
         type: Number,
         default: 0
     },
-    requestStatus: {
-        type: String,
-
-        enum: ['None', 'Confirmed', 'Cancelled']
-    },
-    tasks:
-        [{ type: mongoose.Types.ObjectId, ref: 'taskrequest' }],
-
+    PricePerHour : {
+        type : Number ,
+        default: 0
+    }
 })
 const Tasker = mongoose.model('tasker', TaskerSchema);
 module.exports = Tasker;
