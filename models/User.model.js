@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Name Field is required'],
-        unique: true
+        
     },
     email: {
         type: String,
@@ -26,10 +26,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Password Field is required']
     },
-    zip: {
-        type: String,
-
-    },
     role: {
         type: String,
         enum: ['admin', 'customer', 'tasker'],
@@ -37,9 +33,8 @@ const UserSchema = new mongoose.Schema({
     },
     address: {
         type: mongoose.Types.ObjectId,
-
         ref: 'address',
-        required: true
+        required: false
     },
     newNotificationCount: {
         type: Number,
