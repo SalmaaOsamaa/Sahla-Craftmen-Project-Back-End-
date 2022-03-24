@@ -4,7 +4,8 @@
   "description": "GraduationProject Backend",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "add": "nodemon AddTasker.js"
   },
   "author": "",
   "license": "ISC",
