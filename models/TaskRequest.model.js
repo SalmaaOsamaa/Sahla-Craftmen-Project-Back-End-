@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { required } = require('nodemon/lib/config');
 
 
 const taskRequest = new mongoose.Schema({
@@ -6,39 +7,42 @@ const taskRequest = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'task'
     },
-    address: {
+    workarea: {
         type: mongoose.Types.ObjectId,
-        ref: 'address',
+        ref: 'workarea',
         required: true
     },
-    customer: {
-        type: mongoose.Types.ObjectId,
-        ref: 'user'
+    // customer: {
+    //     type: mongoose.Types.ObjectId,
+    //     ref: 'user'
 
-    },
+    // },
 
     taskOption: {
         enum: ['small', 'medium', 'large'],
-        required: true
+        required: false
     },
     description: {
         type: String,
         required: true
     },
     tasker: {
-        type: mongoose.Types.ObjectId,
-        ref: 'user',
-        required: true
+        // type: mongoose.Types.ObjectId,
+        // ref: 'tasker',
+        // required: true
+        type:String
 
     },
-    Taskappointment: {
+    taskappointment: {
         type: Date,
         default: Date.now,
         required: true
     },
     status: {
-        type: Number,
-        enum: ['None', 'pending', 'Approved', 'Cancelled']
+        type: String,
+        enum: ['None', 'pending', 'approved', 'rejected'],
+        default:"pending",
+        
     }
 
 

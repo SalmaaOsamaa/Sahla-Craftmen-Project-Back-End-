@@ -13,6 +13,7 @@ const expressSession = require('express-session');
 const session = require("express-session");
 const User = require("./models/User.model");
 const Address = require("./models/Address.model");
+const TaskRequest = require("./models/TaskRequest.model");
 const app = express();
 
 
@@ -89,6 +90,16 @@ app.get('/tasks', async (req, res) => {
     res.json(tasks)
 
 })
+app.post('/createTaskrequests', (req, res) => {
+    var taskrequest = new TaskRequest(req.body)
+    taskrequest.save()
+    res.json(taskrequest)
+})
+app.get('/taskrequests', async (req, res) => {
+    let taskrequests = await TaskRequest.find()
+    res.json(taskrequests)
+
+})
 app.get('/addresses', async (req, res) => {
     let addresses = await Address.find()
     res.json(addresses)
@@ -107,6 +118,7 @@ app.get('/workAreas', async (req, res) => {
 })
 app.get('/workAreas/:name', async (req, res) => {
     let name = req.params.name.toLowerCase()
+
     let workAreas = await WorkArea.findOne({name:name})
     res.json(workAreas)
 })
