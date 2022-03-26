@@ -47,11 +47,11 @@ mongoose.connect(dbURL).then(() => null)
 app.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
         if (err) throw err;
-        if (!user) res.send("No User Exists");
+        if (!user) res.send({msg : "No User Exists"});
         else {
             req.logIn(user, (err) => {
                 if (err) throw err;
-                res.send("Successfully Authenticated");
+                res.send({msg : "Successfully Authenticated" , user });
                 console.log(req.user);
             });
         }
@@ -60,19 +60,19 @@ app.post("/login", (req, res, next) => {
 app.post("/register", (req, res) => {
     User.findOne({ email: req.body.email }, async (err, doc) => {
         if (err) throw err;
-        if (doc) res.send("User Already Exists");
+        if (doc) res.send({msg:"User Already Exists"});
         if (!doc) {
             const hashedPassword = await bcrypt.hash(req.body.password, 8);
 
             const newUser = new User({
                 email: req.body.email,
                 password: hashedPassword,
-                role: 'customer',
+                role: req.body.role,
                 name: req.body.name,
                 address: req.body.address 
             });
             await newUser.save();
-            res.send("User Created");
+            res.send({msg : "User Created" , user : newUser});
         }
     });
 });

@@ -28,8 +28,6 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'customer', 'tasker'],
-        required: true
     },
     address: {
         type: mongoose.Types.ObjectId,
