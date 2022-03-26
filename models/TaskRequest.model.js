@@ -35,7 +35,6 @@ const taskRequest = new mongoose.Schema({
     },
     taskappointment: {
         type: Date,
-        default: Date.now,
         required: true
     },
     status: {

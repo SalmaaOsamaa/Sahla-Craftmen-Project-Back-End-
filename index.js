@@ -100,6 +100,7 @@ app.get('/taskrequests', async (req, res) => {
 
 })
 app.get('/addresses', async (req, res) => {
+
     let addresses = await Address.find()
     res.json(addresses)
 
