@@ -3,6 +3,10 @@ const { required } = require('nodemon/lib/config');
 
 
 const taskRequest = new mongoose.Schema({
+    customer:{
+        type:String,
+        required: true
+    },
     task: {
         type: mongoose.Types.ObjectId,
         ref: 'task'
@@ -12,13 +16,7 @@ const taskRequest = new mongoose.Schema({
         ref: 'workarea',
         required: true
     },
-    // customer: {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: 'user'
-
-    // },
-
-    
+   
     description: {
         type: String,
         required: true
