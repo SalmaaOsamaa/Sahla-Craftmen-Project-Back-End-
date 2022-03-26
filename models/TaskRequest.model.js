@@ -18,19 +18,16 @@ const taskRequest = new mongoose.Schema({
 
     // },
 
-    taskOption: {
-        enum: ['small', 'medium', 'large'],
-        required: false
-    },
+    
     description: {
         type: String,
         required: true
     },
     tasker: {
-        // type: mongoose.Types.ObjectId,
-        // ref: 'tasker',
-        // required: true
-        type:String
+         type: mongoose.Types.ObjectId,
+         ref: 'tasker',
+         required: true
+        
 
     },
     taskappointment: {
@@ -42,6 +39,10 @@ const taskRequest = new mongoose.Schema({
         enum: ['None', 'pending', 'approved', 'rejected'],
         default:"pending",
         
+    },
+    paymentmethod:{
+        type: String,
+        required:true
     }
 
 
