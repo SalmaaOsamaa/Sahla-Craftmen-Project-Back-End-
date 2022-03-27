@@ -18,7 +18,6 @@ const TaskSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-
     taskcat: {
         type: mongoose.Types.ObjectId,
         ref: 'taskcategory',
