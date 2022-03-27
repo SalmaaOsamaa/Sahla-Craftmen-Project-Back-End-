@@ -8,6 +8,7 @@ const TaskSchema = new mongoose.Schema({
     image: {
         type: String,
         required: false,
+        default:"https://picsum.photos/400",
         unique:false
     },
     whattoexpect: {
