@@ -151,7 +151,7 @@ app.post('/reviews', async (req, res) => {
     res.send(data)
 })
 app.put('/changeTaskStatus', async(req,res) => {
-    const taskRequestId = req.body.taskId
+    const taskRequestId = req.body.taskRequestId
     const status = req.body.status
     const taskRequest = await TaskRequest.findById(taskRequestId)
     if(taskRequest){
