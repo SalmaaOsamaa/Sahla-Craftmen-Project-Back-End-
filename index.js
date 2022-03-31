@@ -263,3 +263,34 @@ app.delete("/tasks/:id", (req,res)=>{
    }
 
 });
+app.post('/reviews', async (req, res) => {
+    const review = new Review(req.body)
+    await review.save()
+    console.log(data);
+    res.send(data)
+})
+app.put('/changeTaskStatus', async(req,res) => {
+    const taskRequestId = req.body.taskRequestId
+    const status = req.body.status
+    const taskRequest = await TaskRequest.findById(taskRequestId)
+    if(taskRequest){
+        if(status == 'accepted' || status == 'rejected'){
+            // APPROACH 1
+            // task.status = status
+            // task.save()
+            // APPROACH 2
+            TaskRequest.updateOne({_id: taskRequestId}, {status: status})
+            return taskRequest
+        }
+    }
+})
+app.patch('/taskers/:id', async (req, res) => {
+    try {
+        const tasker = await Tasker.findById(req.params.id)
+        Object.assign(tasker , req.body)
+        tasker.save()
+        res.send({data : tasker})
+    } catch {
+        res.status(404).send({error : "tasker not found"})
+    }
+})
